@@ -1,0 +1,85 @@
+@mixin paddings($t: false, $r: false, $b: false, $l: false) {
+  @if $t {
+    padding-top: $t;
+  }
+
+  @if $r {
+    padding-right: $r;
+  }
+
+  @if $b {
+    padding-bottom: $b;
+  }
+
+  @if $l {
+    padding-left: $l;
+  }
+}
+
+@mixin margins($t: false, $r: false, $b: false, $l: false) {
+  @if $t {
+    margin-top: $t;
+  }
+
+  @if $r {
+    margin-right: $r;
+  }
+
+  @if $b {
+    margin-bottom: $b;
+  }
+
+  @if $l {
+    margin-left: $l;
+  }
+}
+
+@mixin textOpt($s: initial, $h: initial, $w: initial) {
+  line-height: $h;
+  font-size: $s;
+  font-weight: $w;
+}
+
+@mixin flexContainer($fd: row, $jc: start, $ai: stretch, $rg: normal, $cg: normal, $fw: nowrap) {
+  display: flex;
+  gap: $rg $cg;
+  flex-flow: $fd $fw;
+  align-items: $ai;
+  justify-content: $jc;
+}
+
+@mixin position($p: static, $t: false, $r: false, $b: false, $l: false, $trX: false, $trY: false) {
+  position: $p;
+
+  @if ($t) {
+    top: $t;
+  }
+
+  @if ($r) {
+    right: $r;
+  }
+
+  @if ($b) {
+    bottom: $b;
+  }
+
+  @if ($l) {
+    left: $l;
+  }
+
+  @if $trX and $trY {
+    transform: translate($trX, $trY);
+  } @else if $trX {
+    transform: translateX($trX);
+  } @else if $trY {
+    transform: translateY($trY);
+  }
+}
+
+@mixin sizes($w: initial, $h: false) {
+  width: $w;
+
+  @if ($h) {
+    height: $h;
+  }
+}
