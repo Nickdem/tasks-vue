@@ -1,26 +1,23 @@
+import type { TaskInfo, taskState } from '@/utils'
 import { defineStore } from 'pinia'
 
-interface State {
-  taskList: TaskInfo[]
-  currentTask: TaskInfo | null
-}
-
-export const useUserStore = defineStore('task', {
-  state: (): State => {
+export const useTaskStore = defineStore('task', {
+  state: (): taskState => {
     return {
       taskList: [],
       currentTask: null,
     }
   },
+  actions: {
+    setUser(currentTaskInfo: TaskInfo) {
+      this.currentTask = currentTaskInfo
+    },
+    setUserList(taskListInfo: TaskInfo[]) {
+      this.taskList = taskListInfo
+    },
+  },
+  getters: {
+    getUserListInfo: (state) => state.taskList,
+    getUserInfo: (state) => state.currentTask,
+  },
 })
-
-interface TaskInfo {
-  task_title: string
-  task_body: string
-  task_created_by: string
-  task_created_time: string
-  task_deadline: string
-  task_status: string
-  task_fire: string
-  task_work_to: string
-}

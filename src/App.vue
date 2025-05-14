@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+
 import LayoutView from '@/views/LayoutView.vue'
 </script>
 
