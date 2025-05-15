@@ -1,4 +1,4 @@
-import type { TaskInfo, taskState } from '@/utils'
+import { taskApi, type TaskInfo, type taskState } from '@/utils'
 import { defineStore } from 'pinia'
 
 export const useTaskStore = defineStore('task', {
@@ -6,18 +6,70 @@ export const useTaskStore = defineStore('task', {
     return {
       taskList: [],
       currentTask: null,
+      taskListLoading: false,
+      currentTaskLoading: false,
+      currentTaskError: '',
+      taskListError: '',
     }
   },
   actions: {
-    setUser(currentTaskInfo: TaskInfo) {
+    setCurrentTask(currentTaskInfo: TaskInfo) {
       this.currentTask = currentTaskInfo
     },
-    setUserList(taskListInfo: TaskInfo[]) {
+    setTaskList(taskListInfo: TaskInfo[]) {
       this.taskList = taskListInfo
+    },
+    setTaskListLoading(value: boolean) {
+      this.taskListLoading = value
+    },
+    setCurrentTaskLoading(value: boolean) {
+      this.currentTaskLoading = value
+    },
+    setCurrentTaskError(value: string) {
+      this.currentTaskError = value
+    },
+    setTaskListError(value: string) {
+      this.taskListError = value
+    },
+    async getFromApiTask(id: number) {
+      this.setCurrentTaskLoading(true)
+      console.log('getuser')
+      try {
+        const task = await taskApi(`tasks/${id}`)
+        if (await task) {
+          this.setCurrentTask(task)
+        }
+      } catch (err) {
+        const error = err instanceof Error
+        this.setCurrentTaskError('Что-то пошло не так')
+        console.error('Произошла ошибка: ', error)
+      } finally {
+        this.setCurrentTaskLoading(false)
+      }
+    },
+    async getFromApiTaskList() {
+      this.setTaskListLoading(true)
+      console.log('gettasklist')
+      try {
+        const tasks = await taskApi('tasks')
+        if (await tasks.length) {
+          this.setTaskList(tasks)
+        } else {
+          this.setTaskList([])
+        }
+      } catch (err) {
+        const error = err instanceof Error
+        this.setTaskListError('Что-то пошло не так')
+        console.error('Произошла ошибка: ', error)
+      } finally {
+        this.setTaskListLoading(false)
+      }
     },
   },
   getters: {
-    getUserListInfo: (state) => state.taskList,
-    getUserInfo: (state) => state.currentTask,
+    getTaskListInfo: (state) => state.taskList,
+    getTaskInfo: (state) => state.currentTask,
+    getLoadingTask: (state) => state.currentTaskLoading,
+    getLoadingTasks: (state) => state.taskListLoading,
   },
 })

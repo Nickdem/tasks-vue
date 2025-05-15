@@ -13,6 +13,10 @@ export interface UserState {
 export interface taskState {
   taskList: TaskInfo[]
   currentTask: TaskInfo | null
+  taskListLoading: boolean
+  currentTaskLoading: boolean
+  currentTaskError: string
+  taskListError: string
 }
 export interface TaskInfo {
   task_title: string
@@ -23,6 +27,7 @@ export interface TaskInfo {
   task_status: string
   task_fire: string
   task_work_to: string
+  id: string
 }
 
 const baseUrl = 'https://nickdemid.store/'
@@ -38,7 +43,17 @@ export const userApi = (param: string, method: string = 'GET', body?: UserInfo) 
       .catch((err) => console.log(err))
   }
 }
+export const taskApi = (param: string, method: string = 'GET', body?: UserInfo) => {
+  console.log('body: ', body)
 
+  if (method == 'GET') {
+    return fetch(`${baseUrl + param}`, {
+      method: 'GET',
+    })
+      .then((data) => data.json())
+      .catch((err) => console.log(err))
+  }
+}
 // export const taskApi = (param: string, method: string, body?: UserInfo) => {
 
 // }

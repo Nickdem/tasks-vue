@@ -33,6 +33,8 @@ export const useUserStore = defineStore('user', {
     },
     async getFromApiUserList() {
       this.setLoadingUsers(true)
+      console.log('getuserlist')
+
       try {
         const users = await userApi('task-users')
         if (await users.length) {
@@ -50,6 +52,7 @@ export const useUserStore = defineStore('user', {
     },
     async getFromApiUser(id: number) {
       this.setLoadingUser(true)
+      console.log('getuser')
       try {
         const user = await userApi(`task-users/${id}`)
         if (await user) {

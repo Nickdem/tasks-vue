@@ -3,6 +3,7 @@ import HomeView from '@/views/HomeView.vue'
 import TasksView from '@/views/TasksView.vue'
 import TaskView from '@/views/TaskView.vue'
 import ProfileView from '@/views/ProfileView.vue'
+import { useUserStore } from '@/stores/user'
 // import CreateView from '@/views/CreateView.vue'
 
 const router = createRouter({
@@ -34,15 +35,13 @@ const router = createRouter({
       name: 'task',
       component: TaskView,
     },
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import('../views/AboutView.vue'),
-    // },
   ],
 })
 
+router.beforeEach((to, from, next) => {
+  const userStore = useUserStore()
+  console.log(userStore.getUserInfoName)
+  if (to.name !== 'home' && !userStore.user) next({ name: 'home' })
+  else next()
+})
 export default router

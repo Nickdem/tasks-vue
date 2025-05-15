@@ -1,40 +1,24 @@
 <template>
-  <!-- <p>header</p> -->
-
-  <!-- <div v-if="userStore.loadingUser">загрузка</div>
-  <div v-else>{{userStore.getUserInfoName}}</div> -->
   <header class="app-header">
     <div class="app-header__left">
-      <h1><router-link to="/"> Таска</router-link></h1>
+      <LogoEl />
     </div>
 
     <div class="app-header__right">
-      <LoaderEl width="20" v-if="userStore.loadingUser" />
-      <div class="app-header__auth">
-        <router-link to="/create" v-if="userStore.getUserInfoName">Создать</router-link>
-        <router-link to="/profile" v-if="userStore.getUserInfoName"
-          >Профиль ({{ userStore.getUserInfoName }})</router-link
-        >
-        <button
-          class="app-header__auth-btn"
-          @click="
-            !userStore.getUserInfoName ? userStore.getFromApiUser(1) : userStore.setUser(null)
-          "
-        >
-          {{ !userStore.getUserInfoName ? 'Войти' : 'Выйти' }}
-        </button>
-      </div>
+      <AuthBlock />
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
-// import { useTaskStore } from '@/stores/task';
-import { useUserStore } from '@/stores/user'
+// import { useUserStore } from '@/stores/user'
 import { onMounted } from 'vue'
-import LoaderEl from './LoaderEl.vue'
+// import LoaderEl from './LoaderEl.vue'
+import LogoEl from './LogoEl.vue'
+import AuthBlock from './AuthBlock.vue'
+
 // const taskStore = useTaskStore()
-const userStore = useUserStore()
+// const userStore = useUserStore()
 // const loading = ref(false)
 // const error = ref(false)
 // console.log(userStore)
