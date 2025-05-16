@@ -5,12 +5,10 @@ import { onMounted } from 'vue'
 const tasksStore = useTaskStore()
 import { useRoute } from 'vue-router'
 const route = useRoute()
-// const re = useRouter()
-// console.log(r.params, '___' , re)
+
 onMounted(() => {
   tasksStore.getFromApiTask(+route.params.id)
 })
-// console.log(route);
 </script>
 
 <template>
@@ -18,5 +16,4 @@ onMounted(() => {
   <div class="" v-else>
     {{ tasksStore.getTaskInfo?.task_title }}
   </div>
-  <!-- <p>Detail task {{ route.params.id }}</p> -->
 </template>

@@ -1,4 +1,4 @@
-import { userApi, type UserInfo, type UserState } from '@/utils'
+import { userApi, makeSessionUser, type UserInfo, type UserState, resetSessionUser } from '@/utils'
 import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', {
@@ -15,6 +15,11 @@ export const useUserStore = defineStore('user', {
   actions: {
     setUser(userInfo: UserInfo | null) {
       this.user = userInfo
+      if (userInfo) {
+        makeSessionUser(userInfo)
+      } else {
+        resetSessionUser()
+      }
     },
     setUserList(userListInfo: UserInfo[]) {
       this.userList = userListInfo
@@ -33,7 +38,6 @@ export const useUserStore = defineStore('user', {
     },
     async getFromApiUserList() {
       this.setLoadingUsers(true)
-      console.log('getuserlist')
 
       try {
         const users = await userApi('task-users')
@@ -52,7 +56,6 @@ export const useUserStore = defineStore('user', {
     },
     async getFromApiUser(id: number) {
       this.setLoadingUser(true)
-      console.log('getuser')
       try {
         const user = await userApi(`task-users/${id}`)
         if (await user) {
@@ -73,5 +76,6 @@ export const useUserStore = defineStore('user', {
     getLoadingUser: (state) => state.loadingUser,
     getLoadingUsers: (state) => state.loadingUsers,
     getUserInfoName: (state) => state.user?.user_fullname || null,
+    getUserInfoJob: (state) => state.user?.user_job || null,
   },
 })

@@ -33,7 +33,7 @@ export const useTaskStore = defineStore('task', {
     },
     async getFromApiTask(id: number) {
       this.setCurrentTaskLoading(true)
-      console.log('getuser')
+
       try {
         const task = await taskApi(`tasks/${id}`)
         if (await task) {
@@ -49,7 +49,7 @@ export const useTaskStore = defineStore('task', {
     },
     async getFromApiTaskList() {
       this.setTaskListLoading(true)
-      console.log('gettasklist')
+
       try {
         const tasks = await taskApi('tasks')
         if (await tasks.length) {

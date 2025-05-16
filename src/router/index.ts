@@ -40,7 +40,6 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const userStore = useUserStore()
-  console.log(userStore.getUserInfoName)
   if (to.name !== 'home' && !userStore.user) next({ name: 'home' })
   else next()
 })

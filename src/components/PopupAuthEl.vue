@@ -3,9 +3,9 @@
     <LoaderEl width="30" v-if="userStore.getLoadingUsers" />
     <button
       v-else
-      v-for="(user, idx) in userStore.getUserListInfo"
-      :key="idx"
-      @click="userStore.getFromApiUser(idx)"
+      v-for="user in userStore.getUserListInfo"
+      :key="user.id"
+      @click="userStore.getFromApiUser(user.id)"
     >
       {{ user.user_fullname }}
     </button>
