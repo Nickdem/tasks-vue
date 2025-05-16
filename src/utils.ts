@@ -69,6 +69,7 @@ export function resetSessionUser() {
   sessionStorage.removeItem('task-user-start-life')
   sessionStorage.removeItem('task-user-end-life')
   sessionStorage.removeItem('task-user')
+  resetSessionPaginationLength()
 }
 
 export function getSessionUser() {
@@ -76,6 +77,18 @@ export function getSessionUser() {
     endTime: sessionStorage.getItem('task-user-end-life'),
     taskUser: sessionStorage.getItem('task-user'),
   }
+}
+
+export function makeSessionPaginationLength(num: number) {
+  sessionStorage.setItem('task-user-pagination', num.toString())
+}
+
+export function resetSessionPaginationLength() {
+  sessionStorage.removeItem('task-user-pagination')
+}
+
+export function getSessionPaginationLength() {
+  return sessionStorage.getItem('task-user-pagination')
 }
 
 // export const taskApi = (param: string, method: string, body?: UserInfo) => {

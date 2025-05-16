@@ -47,11 +47,11 @@ export const useTaskStore = defineStore('task', {
         this.setCurrentTaskLoading(false)
       }
     },
-    async getFromApiTaskList() {
+    async getFromApiTaskList(query?: string) {
       this.setTaskListLoading(true)
 
       try {
-        const tasks = await taskApi('tasks')
+        const tasks = await taskApi('tasks' + query)
         if (await tasks.length) {
           this.setTaskList(tasks)
         } else {

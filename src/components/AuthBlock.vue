@@ -34,8 +34,6 @@ const router = useRouter()
 onMounted(() => {
   const { endTime, taskUser } = getSessionUser()
   if (endTime != null) {
-    console.log('___________', endTime, '--', Date.now())
-
     if (+endTime < Date.now()) {
       userStore.setUser(null)
     } else if (taskUser) {
