@@ -10,9 +10,13 @@ export const useTaskStore = defineStore('task', {
       currentTaskLoading: false,
       currentTaskError: '',
       taskListError: '',
+      countOfTasks: 0,
     }
   },
   actions: {
+    setCount(number: number) {
+      this.countOfTasks = number
+    },
     setCurrentTask(currentTaskInfo: TaskInfo) {
       this.currentTask = currentTaskInfo
     },
@@ -52,8 +56,10 @@ export const useTaskStore = defineStore('task', {
 
       try {
         const tasks = await taskApi('tasks' + query)
-        if (await tasks.length) {
-          this.setTaskList(tasks)
+
+        if (await tasks.tasks.length) {
+          this.setCount(tasks.count)
+          this.setTaskList(tasks.tasks)
         } else {
           this.setTaskList([])
         }
@@ -71,5 +77,6 @@ export const useTaskStore = defineStore('task', {
     getTaskInfo: (state) => state.currentTask,
     getLoadingTask: (state) => state.currentTaskLoading,
     getLoadingTasks: (state) => state.taskListLoading,
+    getCount: (state) => state.countOfTasks,
   },
 })

@@ -18,6 +18,7 @@ export interface taskState {
   currentTaskLoading: boolean
   currentTaskError: string
   taskListError: string
+  countOfTasks: number
 }
 export interface TaskInfo {
   task_title: string
