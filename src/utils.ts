@@ -19,6 +19,7 @@ export interface taskState {
   currentTaskError: string
   taskListError: string
   countOfTasks: number
+  toCreateTask: TaskInfo
 }
 export interface TaskInfo {
   task_title: string
@@ -27,14 +28,18 @@ export interface TaskInfo {
   task_created_time: string
   task_deadline: string
   task_status: string
-  task_fire: string
-  task_work_to: string
-  id: string
+  task_fire: boolean
+  task_to_work: string
+  id?: string
 }
 
 const baseUrl = 'https://nickdemid.store/'
 
-export const userApi = (param: string, method: string = 'GET', body?: UserInfo) => {
+export const userApi = (
+  param: string,
+  method: string = 'GET',
+  body?: BodyInit | null | undefined,
+) => {
   console.log('body: ', body)
   if (method == 'GET') {
     return fetch(`${baseUrl + param}`, {
@@ -44,12 +49,21 @@ export const userApi = (param: string, method: string = 'GET', body?: UserInfo) 
       .catch((err) => console.error(err))
   }
 }
-export const taskApi = (param: string, method: string = 'GET', body?: UserInfo) => {
+export const taskApi = (param: string, method: string = 'GET', body?: TaskInfo) => {
   console.log('body: ', body)
 
   if (method == 'GET') {
     return fetch(`${baseUrl + param}`, {
       method: 'GET',
+    })
+      .then((data) => data.json())
+      .catch((err) => console.error(err))
+  }
+
+  if (method == 'POST' && body) {
+    return fetch(`${baseUrl + param}`, {
+      method: 'POST',
+      body: JSON.stringify(body),
     })
       .then((data) => data.json())
       .catch((err) => console.error(err))
@@ -95,3 +109,15 @@ export function getSessionPaginationLength() {
 // export const taskApi = (param: string, method: string, body?: UserInfo) => {
 
 // }
+
+export const formatDateISO = (date: Date) => {
+  // Convert the date to ISO string
+  const isoString = date.toISOString()
+  // Split at the "T" character to get the date part
+  const formattedDate = isoString.split('T')[0]
+  return formattedDate
+}
+
+// // Example usage
+// const currentDate = new Date();
+// console.log(formatDateISO(currentDate));

@@ -77,5 +77,6 @@ export const useUserStore = defineStore('user', {
     getLoadingUsers: (state) => state.loadingUsers,
     getUserInfoName: (state) => state.user?.user_fullname || null,
     getUserInfoJob: (state) => state.user?.user_job || null,
+    getToCreateUsers: (state) => state.userList.filter((usr) => usr.user_job == 'Программист'),
   },
 })
