@@ -33,6 +33,11 @@ export interface TaskInfo {
   id?: string
 }
 
+export interface applState {
+  theme: string
+  // authPopupOpen: boolean
+}
+
 const baseUrl = 'https://nickdemid.store/'
 
 export const userApi = (
@@ -121,3 +126,9 @@ export const formatDateISO = (date: Date) => {
 // // Example usage
 // const currentDate = new Date();
 // console.log(formatDateISO(currentDate));
+
+export const formatDate = (date: string) => {
+  if (!date) return null
+  const [year, month, day] = date.split('-')
+  return `${day}-${month}-${year}`
+}
