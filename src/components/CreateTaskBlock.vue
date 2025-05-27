@@ -48,34 +48,53 @@
         v-model="taskStore.getToCreateTask.task_title"
         name="task_title"
         label="Название"
+        variant="solo-filled"
+        :rules="titleRules"
+        required
       ></v-text-field>
       <v-textarea
         label="Описание задачи"
         v-model="taskStore.getToCreateTask.task_body"
         name="task_body"
-        variant="filled"
+        variant="solo-filled"
         auto-grow
+        :rules="bodyRules"
+        required
       ></v-textarea>
+      <!-- <input type="date" name="task_deadline" v-model="taskStore.getToCreateTask.task_deadline" /> -->
       <v-date-input
         label="Окончание задачи"
         v-model="taskStore.getToCreateTask.task_deadline"
-        variant="outlined"
-        locale="ru-RU"
+        variant="solo-filled"
         name="task_deadline"
-        persistent-placeholder
+        class="to-hide"
+        v-on:update:modelValue="
+          (k) => {
+            taskStore.setDeadlineDateCreatedBy(k)
+          }
+        "
+        :rules="dateRules"
+        :min="new Date().toISOString().split('T')[0]"
+        required
       ></v-date-input>
+      <!--   :hide-weekdays="true"  :display-format="format"
+        prefix="ISO Date:"
+:onchange="(e:any) => console.log(e)"
+        v-on:save="(k) => { taskStore.setDeadlineDateCreatedBy(k), console.log('kek', k.toLocaleString()), console.log('kkk-',k), console.log('kkk-',Date.parse(k)), console.log('kkk-', formatDateISO(new Date(k)))}" -->
+      <v-select
+        label="Исполнитель"
+        variant="solo-filled"
+        v-model="taskStore.getToCreateTask.task_to_work"
+        :items="userStore.getToCreateUsers.map((usr) => usr.user_fullname)"
+        required
+      >
+      </v-select>
       <v-checkbox
         label="Срочная задача"
         v-model="taskStore.getToCreateTask.task_fire"
         name="task_fire"
         hide-details
       ></v-checkbox>
-      <v-select
-        label="Исполнитель"
-        v-model="taskStore.getToCreateTask.task_to_work"
-        :items="userStore.getToCreateUsers.map((usr) => usr.user_fullname)"
-      >
-      </v-select>
       <!-- <v-dialog transition="dialog-top-transition" width="auto">
         <template v-slot:activator="{ props: activatorProps }">
           <v-btn
@@ -98,21 +117,29 @@
       </v-dialog> -->
 
       <v-btn class="mt-2" type="submit" block>Submit</v-btn>
+      <v-btn class="mt-4" color="error" block type="reset"> Reset Form </v-btn>
     </v-form>
   </v-sheet>
 </template>
 
 <script setup lang="ts">
 // import { computed, onMounted } from 'vue'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 
 import { useTaskStore } from '@/stores/task'
 import { useUserStore } from '@/stores/user'
 // import { formatDateISO } from '@/utils'
-
+// import { useDate } from 'vuetify'
+// import { formatDateISO } from '@/utils'
+// const adapter = useDate()
 const taskStore = useTaskStore()
 const userStore = useUserStore()
+// function format (date: Date) {
+//   console.log(adapter.toISO(date));
 
+//     return adapter.toISO(date)
+//   }
+// const menu = ref(false)
 // function submitForm() {
 //   // taskApi()
 //   taskStore.createApiTaskList()
@@ -129,4 +156,20 @@ onMounted(() => {
 // const formatDate = computed(() => {
 //   return formatDateISO(taskStore.getToCreateTask.task_deadline)
 // })
+
+const titleRules = ref([
+  (v: string) => !!v || 'Поле обязательное',
+  (v: string) => (v && v.length >= 10) || 'Минимальная длина 10 символов',
+])
+const bodyRules = ref([
+  (v: string) => !!v || 'Поле обязательное',
+  (v: string) => (v && v.length >= 20) || 'Минимальная длина 20 символов',
+])
+const dateRules = ref([])
 </script>
+
+<style lang="scss">
+.to-hide .v-input__prepend {
+  display: none;
+}
+</style>

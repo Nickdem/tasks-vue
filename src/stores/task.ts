@@ -11,7 +11,7 @@ export const useTaskStore = defineStore('task', {
         task_body: '',
         task_created_by: '',
         task_created_time: '',
-        task_deadline: '',
+        task_deadline: new Date().toISOString().split('T')[0],
         task_status: '',
         task_fire: false,
         task_to_work: '',
@@ -27,11 +27,23 @@ export const useTaskStore = defineStore('task', {
     setCount(number: number) {
       this.countOfTasks = number
     },
+
     setNameCreatedBy(userName: string) {
       this.toCreateTask.task_created_by = userName
     },
     setStatusCreatedBy(status: string) {
       this.toCreateTask.task_status = status
+    },
+    setDeadlineDateCreatedBy(number: string) {
+      // console.log(new Date(number));
+      // console.log( );
+      // console.log(formatDateISO(new Date(number)));
+
+      this.toCreateTask.task_deadline = new Date(
+        new Date(number).getTime() - new Date().getTimezoneOffset() * 60000,
+      )
+        .toISOString()
+        .split('T')[0]
     },
     setCurrentTask(currentTaskInfo: TaskInfo) {
       this.currentTask = currentTaskInfo

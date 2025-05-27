@@ -32,9 +32,13 @@ export interface TaskInfo {
   task_to_work: string
   id?: string
 }
-
+export interface BreadcrumbInfo {
+  to: string
+  title: string
+}
 export interface applState {
   theme: string
+  breadcrumbsList: BreadcrumbInfo[]
   // authPopupOpen: boolean
 }
 

@@ -5,6 +5,12 @@ import TaskView from '@/views/TaskView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import { useUserStore } from '@/stores/user'
 // import CreateView from '@/views/CreateView.vue'
+const breadcrumbBase = [
+  {
+    title: 'Главная',
+    to: '/',
+  },
+]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,21 +25,53 @@ const router = createRouter({
       name: 'create',
       // component: CreateView,
       component: () => import('../views/CreateView.vue'),
+      meta: {
+        breadcrumbs: [
+          ...breadcrumbBase,
+          {
+            title: 'Создать задачу',
+          },
+        ],
+      },
     },
     {
       path: '/tasks',
       name: 'tasks',
       component: TasksView,
+      meta: {
+        breadcrumbs: [
+          ...breadcrumbBase,
+          {
+            title: 'Задачи',
+          },
+        ],
+      },
     },
     {
       path: '/profile',
       name: 'profile',
       component: ProfileView,
+      meta: {
+        breadcrumbs: [
+          ...breadcrumbBase,
+          {
+            title: 'Профиль',
+          },
+        ],
+      },
     },
     {
       path: '/tasks/:id',
       name: 'task',
       component: TaskView,
+      meta: {
+        breadcrumbs: [
+          ...breadcrumbBase,
+          {
+            title: 'Задача',
+          },
+        ],
+      },
     },
   ],
 })

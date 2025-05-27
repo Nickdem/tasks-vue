@@ -2,6 +2,9 @@
 import HeaderBlock from '@/components/HeaderBlock.vue'
 import FooterBlock from '@/components/FooterBlock.vue'
 import { useApplStore } from '@/stores/appl'
+import BreadcrumbsEl from '@/components/BreadcrumbsEl.vue'
+import { useRoute } from 'vue-router'
+import { onUpdated } from 'vue'
 
 // import { ref } from 'vue'
 
@@ -10,7 +13,16 @@ import { useApplStore } from '@/stores/appl'
 // function onClick() {
 //   theme.value = theme.value === 'light' ? 'dark' : 'light'
 // }
+
+// console.log(route);
+
 const applStore = useApplStore()
+
+onUpdated(() => {
+  const route = useRoute()
+  const matchedRoutes = route.matched
+  console.log(matchedRoutes)
+})
 </script>
 
 <template>
@@ -22,6 +34,7 @@ const applStore = useApplStore()
 
       <v-main>
         <v-container>
+          <BreadcrumbsEl :items="applStore.getBreadcrumbsList" />
           <slot></slot>
         </v-container>
       </v-main>
