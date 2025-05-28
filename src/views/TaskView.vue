@@ -15,5 +15,11 @@ onMounted(() => {
   <LoaderEl v-if="tasksStore.currentTaskLoading" />
   <div class="" v-else>
     {{ tasksStore.getTaskInfo?.task_title }}
+    <v-card
+      variant="tonal"
+      :subtitle="tasksStore.getTaskInfo?.task_body"
+      :title="tasksStore.getTaskInfo?.task_title"
+    >
+    </v-card>
   </div>
 </template>

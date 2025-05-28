@@ -19,6 +19,9 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+      meta: {
+        breadcrumbs: [],
+      },
     },
     {
       path: '/create',
@@ -67,6 +70,10 @@ const router = createRouter({
       meta: {
         breadcrumbs: [
           ...breadcrumbBase,
+          {
+            title: 'Задачи',
+            to: '/tasks',
+          },
           {
             title: 'Задача',
           },

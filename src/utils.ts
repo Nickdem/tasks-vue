@@ -1,3 +1,5 @@
+import type { RouteMeta } from 'vue-router'
+
 export interface UserInfo {
   user_fullname: string
   user_job: string
@@ -33,13 +35,20 @@ export interface TaskInfo {
   id?: string
 }
 export interface BreadcrumbInfo {
-  to: string
+  to?: string
   title: string
 }
 export interface applState {
   theme: string
   breadcrumbsList: BreadcrumbInfo[]
   // authPopupOpen: boolean
+}
+// export interface MetaInfo {
+//   breadcrumbs: BreadcrumbInfo[]
+// }
+
+export interface RouteMetaMod extends RouteMeta {
+  breadcrumbs?: BreadcrumbInfo[]
 }
 
 const baseUrl = 'https://nickdemid.store/'

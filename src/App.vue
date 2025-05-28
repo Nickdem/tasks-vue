@@ -1,18 +1,67 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+// import BreadcrumbsEl from '@/components/BreadcrumbsEl.vue'
 
 import LayoutView from '@/views/LayoutView.vue'
 </script>
 
 <template>
   <LayoutView>
+    <!-- <router-view v-slot="{ Component, route }">
+      <transition name="fade" mode="out-in">
+        <component :is="Component" :key="route.path" />
+      </transition>
+    </router-view> -->
     <RouterView />
+    <!-- <RouterView v-slot="{ Component, route }"><transition name="fade" mode="out-in">
+        <component :is="Component" :key="route.path" />
+      </transition></RouterView> -->
+    <!-- <v-main>
+      <v-container fill-height>
+        <BreadcrumbsEl />
+        <router-view v-slot="{ Component, route }">
+          <transition name="slide-x" mode="out-in">
+            <component :is="Component" :key="route.path" />
+          </transition>
+        </router-view>
+      </v-container>
+    </v-main> -->
   </LayoutView>
 </template>
 
 <style lang="scss">
 header a {
   color: inherit;
+}
+.task-cart a {
+  color: inherit;
+}
+.v-breadcrumbs-item span {
+  opacity: 0.7;
+}
+.v-breadcrumbs-item a {
+  color: inherit;
+}
+/* v-slide-x-transition look a like */
+.slide-x-enter-active,
+.slide-x-leave-active {
+  transition:
+    transform 0.6s cubic-bezier(0.25, 0.8, 0.5, 1),
+    opacity 0.8s;
+  opacity: 1;
+}
+
+.slide-x-enter-from,
+.slide-x-leave-to {
+  opacity: 0;
+}
+
+.slide-x-enter-from {
+  transform: translateX(100px);
+}
+
+.slide-x-leave-to {
+  transform: translateX(-100px);
 }
 // @use '@/assets/scss/_mixins' as m;
 // @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
