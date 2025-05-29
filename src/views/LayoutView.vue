@@ -60,6 +60,14 @@ watch(
 //     // userData.value = await fetchUser(newId)
 //   }
 // )
+// import { useRouter } from 'vue-router'
+
+// const router = useRouter()
+
+// const isHomePage = () => {
+//   return router.currentRoute.value.name === 'home'
+//   // or router.currentRoute.value.path === '/'
+// }
 </script>
 
 <template>
@@ -70,6 +78,11 @@ watch(
       </v-app-bar>
 
       <v-main>
+        <!-- <v-container v-if="router.currentRoute.value.name !== 'home'">
+          <BreadcrumbsEl :items="applStore.getBreadcrumbsList" />
+          <slot></slot>
+        </v-container>
+        <template v-else> <slot></slot></template> -->
         <v-container>
           <BreadcrumbsEl :items="applStore.getBreadcrumbsList" />
           <slot></slot>
@@ -85,8 +98,9 @@ watch(
         </v-container>
       </v-main> -->
       <!-- <slot></slot> -->
+      <v-footer border :height="100" class="d-flex align-center justify-center">
+        <FooterBlock
+      /></v-footer>
     </v-app>
-
-    <v-footer border> <FooterBlock /></v-footer>
   </v-responsive>
 </template>
