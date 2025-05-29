@@ -145,3 +145,18 @@ export const formatDate = (date: string) => {
   const [year, month, day] = date.split('-')
   return `${day}-${month}-${year}`
 }
+
+export const months = [
+  'января',
+  'февраля',
+  'марта',
+  'апреля',
+  'мая',
+  'июня',
+  'июля',
+  'августа',
+  'сентября',
+  'октября',
+  'ноября',
+  'декабря',
+]

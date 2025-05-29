@@ -3,6 +3,7 @@
 </template>
 
 <script setup lang="ts">
+import { months } from '@/utils'
 import { onMounted, ref } from 'vue'
 const time = ref('')
 onMounted(() => {
@@ -12,10 +13,19 @@ onMounted(() => {
 })
 
 function getTime() {
-  const today = new Date()
-  const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
-  const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
-  const dateTime = date + ' ' + time
-  return dateTime
+  // const today = new Date()
+  // const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
+  // const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
+  // const dateTime = date + ' ' + time
+  // return dateTime
+  const now = new Date()
+  const day = now.getDate()
+  const month = months[now.getMonth()]
+  const year = now.getFullYear()
+  const hours = now.getHours().toString().padStart(2, '0')
+  const minutes = now.getMinutes().toString().padStart(2, '0')
+  const seconds = now.getSeconds().toString().padStart(2, '0')
+
+  return `${day} ${month} ${year}, ${hours}:${minutes}:${seconds}`
 }
 </script>

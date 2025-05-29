@@ -98,7 +98,7 @@ watch(
         </v-container>
       </v-main> -->
       <!-- <slot></slot> -->
-      <v-footer border :height="100" class="d-flex align-center justify-center">
+      <v-footer border :height="100" class="d-flex align-center justify-center" :app="true">
         <FooterBlock
       /></v-footer>
     </v-app>
