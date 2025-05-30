@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import HeadingOneEl from '@/components/HeadingOneEl.vue'
 import LoaderEl from '@/components/LoaderEl.vue'
 import { useTaskStore } from '@/stores/task'
 import { onMounted } from 'vue'
@@ -13,7 +14,9 @@ onMounted(() => {
 
 <template>
   <LoaderEl v-if="tasksStore.currentTaskLoading" />
-  <div class="" v-else>
+  <template v-else>
+    <HeadingOneEl :cls="'text-h4 pb-6'">Задача</HeadingOneEl>
+
     {{ tasksStore.getTaskInfo?.task_title }}
     <v-card
       variant="tonal"
@@ -21,5 +24,5 @@ onMounted(() => {
       :title="tasksStore.getTaskInfo?.task_title"
     >
     </v-card>
-  </div>
+  </template>
 </template>

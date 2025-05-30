@@ -43,7 +43,6 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import { onMounted } from 'vue'
 import LogoEl from './LogoEl.vue'
-// import AuthBlock from './AuthBlock.vue'
 import PopupAuthEl from './PopupAuthEl.vue'
 import LoaderEl from './LoaderEl.vue'
 import { getSessionUser, type UserInfo } from '@/utils'
@@ -51,12 +50,8 @@ const router = useRouter()
 const applStore = useApplStore()
 const userStore = useUserStore()
 
-// function openPopupAuth() {
-//   applStore.setAuthPopupOpen(true)
-// }
 function logoutHandler() {
   userStore.setUser(null)
-  // applStore.setAuthPopupOpen(false)
   router.push('/')
 }
 

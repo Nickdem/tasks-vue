@@ -1,10 +1,4 @@
 <template>
-  <pre>
-  {{ taskStore.getToCreateTask }}
-  {{ userStore.getToCreateUsers }}
-  {{ userStore.getUserInfoName }}
-  </pre>
-
   <v-sheet class="mx-auto pa-3">
     <v-form fast-fail ref="formRef" @submit.prevent="submitForm" v-model="isFormValid">
       <v-text-field

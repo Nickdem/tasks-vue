@@ -4,7 +4,6 @@ import TasksView from '@/views/TasksView.vue'
 import TaskView from '@/views/TaskView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import { useUserStore } from '@/stores/user'
-// import CreateView from '@/views/CreateView.vue'
 const breadcrumbBase = [
   {
     title: 'Главная',
@@ -26,7 +25,6 @@ const router = createRouter({
     {
       path: '/create',
       name: 'create',
-      // component: CreateView,
       component: () => import('../views/CreateView.vue'),
       meta: {
         breadcrumbs: [

@@ -1,3 +1,5 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import HeadingOneEl from '@/components/HeadingOneEl.vue'
+</script>
 
-<template><p>Profile</p></template>
+<template><HeadingOneEl :cls="'text-h4 pb-6'">Профиль</HeadingOneEl></template>

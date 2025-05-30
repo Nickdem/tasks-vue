@@ -1,31 +1,11 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-// import BreadcrumbsEl from '@/components/BreadcrumbsEl.vue'
-
 import LayoutView from '@/views/LayoutView.vue'
 </script>
 
 <template>
   <LayoutView>
-    <!-- <router-view v-slot="{ Component, route }">
-      <transition name="fade" mode="out-in">
-        <component :is="Component" :key="route.path" />
-      </transition>
-    </router-view> -->
     <RouterView />
-    <!-- <RouterView v-slot="{ Component, route }"><transition name="fade" mode="out-in">
-        <component :is="Component" :key="route.path" />
-      </transition></RouterView> -->
-    <!-- <v-main>
-      <v-container fill-height>
-        <BreadcrumbsEl />
-        <router-view v-slot="{ Component, route }">
-          <transition name="slide-x" mode="out-in">
-            <component :is="Component" :key="route.path" />
-          </transition>
-        </router-view>
-      </v-container>
-    </v-main> -->
   </LayoutView>
 </template>
 

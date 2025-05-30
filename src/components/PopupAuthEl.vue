@@ -1,14 +1,6 @@
 <template>
   <div v-if="userStore.getUserListInfo.length">
     <LoaderEl width="30" v-if="userStore.getLoadingUsers" />
-    <!-- <button
-      v-else
-      v-for="user in userStore.getUserListInfo"
-      :key="user.id"
-      @click="userStore.getFromApiUser(user.id)"
-    >
-      {{ user.user_fullname }}
-    </button> -->
 
     <v-container class="text-center" v-else>
       <v-row justify="center">
