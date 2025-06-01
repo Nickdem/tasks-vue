@@ -10,10 +10,8 @@ const tasksStore = useTaskStore()
 const userStore = useUserStore()
 const pageLength = ref(getSessionPaginationLength() || 10)
 const tasksType = ref('all')
-
+const page = ref(1)
 onMounted(() => {
-  console.log(123)
-
   if (!tasksStore.getTaskListInfo.length || tasksType.value == 'all') {
     getAllTasksByPagination()
   }
@@ -30,7 +28,7 @@ watch(tasksType, async (newTasksType) => {
 })
 
 function getAllTasksByPagination() {
-  tasksStore.getFromApiTaskList(`?length=${pageLength.value}&page=0`)
+  tasksStore.getFromApiTaskList(`?length=${pageLength.value}&page=${page.value}`)
 }
 
 function getAllTasksByUser() {
@@ -38,24 +36,61 @@ function getAllTasksByUser() {
     tasksStore.getFromApiTaskList(`?where=${userStore.getUserInfoName}`)
   }
 }
+function updatePage(nv: number) {
+  console.log(nv)
+
+  page.value = nv
+  getAllTasksByPagination()
+}
+
+watch(pageLength, (newPageLength) => {
+  // console.log(`x is ${newPageLength}`)
+  if (!/^\d+$/.test(newPageLength.toString())) {
+    pageLength.value = +newPageLength.toString().replace(/[^\d]/g, '')
+  }
+  if (+newPageLength < 2 || !newPageLength) {
+    pageLength.value = 2
+  }
+})
 </script>
 
 <template>
   <HeadingOneEl :cls="'text-h4 pb-6'">Задачи</HeadingOneEl>
   <LoaderEl width="60" v-if="tasksStore.getLoadingTasks && !tasksStore.getTaskListInfo.length" />
   <template v-else>
-    <v-btn-toggle v-model="tasksType" rounded="0" group>
-      <v-btn value="all" variant="tonal"> Все </v-btn>
-      <v-btn value="my" variant="tonal"> Мои </v-btn>
-    </v-btn-toggle>
+    <v-row justify="space-between" class="mx-4 my-4">
+      <v-btn-toggle v-model="tasksType" rounded="0" group>
+        <v-btn value="all" variant="tonal"> Все </v-btn>
+        <v-btn value="my" variant="tonal"> Мои </v-btn>
+      </v-btn-toggle>
 
+      <v-chip> Всего задач: {{ tasksStore.getCount }}</v-chip>
+    </v-row>
     <div class="mt-3">
       <TaskCardEl v-for="task in tasksStore.getTaskListInfo" :key="task.id" :task="task" />
     </div>
-    <div class="">Всего: {{ tasksStore.getCount }}</div>
+
     <div v-if="tasksType == 'all'">
-      <span>Показывать по:</span>
-      <input type="text" v-model="pageLength" @keypress.enter="getAllTasksByPagination" />
+      <!-- {{ tasksStore.getCount }}
+    {{ pageLength }}
+    {{ page }} -->
+      <v-pagination
+        v-model="page"
+        :length="Math.ceil(+tasksStore.getCount / +pageLength)"
+        rounded="circle"
+        v-on:update:modelValue="
+          (nv) => {
+            updatePage(nv)
+          }
+        "
+      ></v-pagination>
+
+      <v-text-field
+        label="Показывать по:"
+        v-model="pageLength"
+        @keypress.enter="getAllTasksByPagination"
+        @change="getAllTasksByPagination"
+      ></v-text-field>
     </div>
   </template>
 </template>

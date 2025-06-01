@@ -49,6 +49,7 @@ export const useTaskStore = defineStore('task', {
       this.currentTask = currentTaskInfo
     },
     setTaskList(taskListInfo: TaskInfo[]) {
+      console.log(taskListInfo)
       this.taskList = taskListInfo
     },
     setTaskListLoading(value: boolean) {
@@ -80,12 +81,15 @@ export const useTaskStore = defineStore('task', {
       }
     },
     async getFromApiTaskList(query?: string) {
+      console.log('start')
+
       this.setTaskListLoading(true)
 
       try {
         const tasks = await taskApi('tasks' + query)
 
         if (await tasks.tasks.length) {
+          console.log('get')
           this.setCount(tasks.count)
           this.setTaskList(tasks.tasks)
         } else {
