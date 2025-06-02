@@ -64,7 +64,9 @@ watch(pageLength, (newPageLength) => {
         <v-btn value="my" variant="tonal"> Мои </v-btn>
       </v-btn-toggle>
 
-      <v-chip> Всего задач: {{ tasksStore.getCount }}</v-chip>
+      <v-chip>
+        Всего задач ({{ tasksType == 'all' ? 'все' : 'мои' }}): {{ tasksStore.getCount }}</v-chip
+      >
     </v-row>
     <div class="mt-3">
       <TaskCardEl v-for="task in tasksStore.getTaskListInfo" :key="task.id" :task="task" />
