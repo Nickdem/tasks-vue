@@ -86,6 +86,15 @@ export const taskApi = (param: string, method: string = 'GET', body?: TaskInfo) 
       .then((data) => data.json())
       .catch((err) => console.error(err))
   }
+  if (method == 'DELETE') {
+    console.log(method)
+
+    return fetch(`${baseUrl + param}`, {
+      method: 'DELETE',
+    })
+      .then((r) => r.json())
+      .catch((err) => console.error(err))
+  }
 }
 
 export function makeSessionUser(user: UserInfo) {

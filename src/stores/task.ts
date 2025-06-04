@@ -1,3 +1,4 @@
+import router from '@/router'
 import { formatDateISO, taskApi, type TaskInfo, type taskState } from '@/utils'
 import { defineStore } from 'pinia'
 
@@ -78,6 +79,20 @@ export const useTaskStore = defineStore('task', {
         console.error('Произошла ошибка: ', error)
       } finally {
         this.setCurrentTaskLoading(false)
+      }
+    },
+    async deleteFromApiTask(id: number) {
+      try {
+        const task = await taskApi(`tasks/${id}`, 'DELETE')
+
+        if (await task) {
+          router.push('/tasks')
+        }
+      } catch (err) {
+        const error = err instanceof Error
+        console.log(error)
+      } finally {
+        console.log('final')
       }
     },
     async getFromApiTaskList(query?: string) {

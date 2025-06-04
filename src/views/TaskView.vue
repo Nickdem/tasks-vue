@@ -23,6 +23,7 @@ onMounted(() => {
       :subtitle="tasksStore.getTaskInfo?.task_body"
       :title="tasksStore.getTaskInfo?.task_title"
     >
+      <v-btn @click="tasksStore.deleteFromApiTask(+route.params.id)">Удалить</v-btn>
     </v-card>
   </template>
 </template>
