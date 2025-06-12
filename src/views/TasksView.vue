@@ -8,7 +8,7 @@ import { getSessionPaginationLength } from '@/utils'
 import { onMounted, ref, watch } from 'vue'
 const tasksStore = useTaskStore()
 const userStore = useUserStore()
-const pageLength = ref(getSessionPaginationLength() || 10)
+const pageLength = ref(getSessionPaginationLength() || 4)
 const tasksType = ref('all')
 const page = ref(1)
 onMounted(() => {
@@ -33,7 +33,9 @@ function getAllTasksByPagination() {
 
 function getAllTasksByUser() {
   if (userStore.getUserInfoName) {
-    tasksStore.getFromApiTaskList(`?where=${userStore.getUserInfoName}`)
+    tasksStore.getFromApiTaskList(
+      `?where=${userStore.getUserInfoName}&type=${userStore.getUserInfoJob}`,
+    )
   }
 }
 function updatePage(nv: number) {
