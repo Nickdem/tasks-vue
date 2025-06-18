@@ -36,8 +36,6 @@ export const useTaskStore = defineStore('task', {
       this.toCreateTask.task_status = status
     },
     setDeadlineDateCreatedBy(number: string) {
-     
-
       this.toCreateTask.task_deadline = new Date(
         new Date(number).getTime() - new Date().getTimezoneOffset() * 60000,
       )
@@ -93,14 +91,12 @@ export const useTaskStore = defineStore('task', {
       }
     },
     async getFromApiTaskList(query?: string) {
-  
       this.setTaskListLoading(true)
 
       try {
         const tasks = await taskApi('tasks' + query)
 
         if (await tasks.tasks.length) {
-          
           this.setCount(tasks.count)
           this.setTaskList(tasks.tasks)
         } else {

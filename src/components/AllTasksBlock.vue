@@ -3,7 +3,7 @@ import LoaderEl from '@/components/LoaderEl.vue'
 
 import TaskCardEl from '@/components/TaskCardEl.vue'
 import { useTaskStore } from '@/stores/task'
-import { getSessionPaginationLength } from '@/utils'
+import { getSessionPaginationLength, makeSessionPaginationLength } from '@/utils'
 import { onMounted, ref, watch } from 'vue'
 
 const tasksStore = useTaskStore()
@@ -40,6 +40,7 @@ watch(pageLength, (newPageLength) => {
   page.value = 1
   pageLengthTimeout = setTimeout(() => {
     getAllTasksByPagination()
+    makeSessionPaginationLength(+pageLength.value)
   }, 800)
 })
 </script>
