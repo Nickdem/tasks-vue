@@ -1,4 +1,14 @@
 <template>
+  <!-- <ProgressBarEl :percentage="+validPercentage" />
+  <v-text-field
+    v-model="percentage"
+    type="number"
+    name="task_title"
+    label="Название"
+    variant="solo-filled"
+    :rules="titleRules"
+    required
+  ></v-text-field> -->
   <v-sheet class="mx-auto pa-3">
     <v-form fast-fail ref="formRef" @submit.prevent="submitForm" v-model="isFormValid">
       <v-text-field
@@ -64,6 +74,19 @@ import { onMounted, ref } from 'vue'
 
 import { useTaskStore } from '@/stores/task'
 import { useUserStore } from '@/stores/user'
+// import ProgressBarEl from '@/components/ProgressBarEl.vue'
+
+// const percentage = ref(0)
+
+// const validPercentage = computed(() => {
+//   // const num = parseFloat(percentage.value)
+//   if (isNaN(percentage.value)) {
+//     return 0
+//   }
+//   if (percentage.value < 0) return 0
+//   if (percentage.value > 100) return 100
+//   return Math.round(percentage.value)
+// })
 
 const taskStore = useTaskStore()
 const userStore = useUserStore()

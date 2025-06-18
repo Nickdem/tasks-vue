@@ -1,8 +1,6 @@
 <template>
   <div v-if="userStore.getUserListInfo.length">
-    <LoaderEl width="30" v-if="userStore.getLoadingUsers" />
-
-    <v-container class="text-center" v-else>
+    <v-container class="text-center">
       <v-row justify="center">
         <v-col
           cols="12"
@@ -21,7 +19,7 @@
 <script setup lang="ts">
 import { useUserStore } from '@/stores/user'
 import { onMounted } from 'vue'
-import LoaderEl from './LoaderEl.vue'
+// import LoaderEl from './LoaderEl.vue'
 
 const userStore = useUserStore()
 

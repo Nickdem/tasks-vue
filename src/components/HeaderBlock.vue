@@ -4,35 +4,35 @@
   <v-spacer></v-spacer>
 
   <LoaderEl width="20" v-if="userStore.loadingUser" />
-  <template v-else>
-    <template v-if="userStore.getUserInfoName">
-      <router-link to="/create" v-if="userStore.getUserInfoJob == 'Менеджер'">
-        <v-btn variant="text"> Создать </v-btn>
-      </router-link>
-      <router-link to="/tasks">
-        <v-btn variant="text"> Задачи </v-btn>
-      </router-link>
-      <router-link to="/profile">
-        <v-btn variant="text"> Профиль ({{ userStore.getUserInfoName }}) </v-btn>
-      </router-link>
-      <v-btn text="Выйти" slim @click="logoutHandler"></v-btn>
-    </template>
-
-    <v-dialog transition="dialog-top-transition" width="auto" v-else>
-      <template v-slot:activator="{ props: activatorProps }">
-        <v-btn v-bind="activatorProps" text="Войти" slim></v-btn>
-      </template>
-      <template v-slot:default="{ isActive }">
-        <v-card>
-          <v-toolbar title="Залогиньтесь!"></v-toolbar>
-          <PopupAuthEl />
-          <v-card-actions class="justify-end">
-            <v-btn text="Закрыть" @click="isActive.value = false"></v-btn>
-          </v-card-actions>
-        </v-card>
-      </template>
-    </v-dialog>
+  <!-- <template v-else> -->
+  <template v-if="userStore.getUserInfoName">
+    <router-link to="/create" v-if="userStore.getUserInfoJob == 'Менеджер'">
+      <v-btn variant="text"> Создать </v-btn>
+    </router-link>
+    <router-link to="/tasks">
+      <v-btn variant="text"> Задачи </v-btn>
+    </router-link>
+    <router-link to="/profile">
+      <v-btn variant="text"> Профиль ({{ userStore.getUserInfoName }}) </v-btn>
+    </router-link>
+    <v-btn text="Выйти" slim @click="logoutHandler"></v-btn>
   </template>
+
+  <v-dialog transition="dialog-top-transition" width="auto" v-else>
+    <template v-slot:activator="{ props: activatorProps }">
+      <v-btn v-bind="activatorProps" text="Войти" slim></v-btn>
+    </template>
+    <template v-slot:default="{ isActive }">
+      <v-card>
+        <v-toolbar title="Залогиньтесь!"></v-toolbar>
+        <PopupAuthEl />
+        <v-card-actions class="justify-end">
+          <v-btn text="Закрыть" @click="isActive.value = false"></v-btn>
+        </v-card-actions>
+      </v-card>
+    </template>
+  </v-dialog>
+  <!-- </template> -->
 
   <v-btn class="ml-sm-2" text="Тема" border slim @click="applStore.toggleTheme"></v-btn>
 </template>

@@ -9,7 +9,7 @@ const { width = '60' } = defineProps<{
 <style lang="scss">
 .loader {
   aspect-ratio: 4;
-  background: radial-gradient(closest-side at calc(100% / 6) 50%, #000 90%, #0000) 0/75% 100%;
+  background: radial-gradient(closest-side at calc(100% / 6) 50%, #7e7e7e 90%, #0000) 0/75% 100%;
   position: relative;
   animation: l15-0 1s infinite linear;
 }

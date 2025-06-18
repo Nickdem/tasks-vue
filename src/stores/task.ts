@@ -36,9 +36,7 @@ export const useTaskStore = defineStore('task', {
       this.toCreateTask.task_status = status
     },
     setDeadlineDateCreatedBy(number: string) {
-      // console.log(new Date(number));
-      // console.log( );
-      // console.log(formatDateISO(new Date(number)));
+     
 
       this.toCreateTask.task_deadline = new Date(
         new Date(number).getTime() - new Date().getTimezoneOffset() * 60000,
@@ -50,7 +48,6 @@ export const useTaskStore = defineStore('task', {
       this.currentTask = currentTaskInfo
     },
     setTaskList(taskListInfo: TaskInfo[]) {
-      console.log(taskListInfo)
       this.taskList = taskListInfo
     },
     setTaskListLoading(value: boolean) {
@@ -96,15 +93,14 @@ export const useTaskStore = defineStore('task', {
       }
     },
     async getFromApiTaskList(query?: string) {
-      console.log('start')
-
+  
       this.setTaskListLoading(true)
 
       try {
         const tasks = await taskApi('tasks' + query)
 
         if (await tasks.tasks.length) {
-          console.log('get')
+          
           this.setCount(tasks.count)
           this.setTaskList(tasks.tasks)
         } else {
@@ -124,7 +120,6 @@ export const useTaskStore = defineStore('task', {
       try {
         // const body = new FormData()
         this.toCreateTask.task_created_time = formatDateISO(new Date())
-        // console.log(this.toCreateTask.task_created_time );
 
         // body.append('task_title', this.toCreateTask.task_title)
         // body.append('task_body', this.toCreateTask.task_body)
@@ -155,6 +150,9 @@ export const useTaskStore = defineStore('task', {
         // this.setTaskListLoading(false)
       }
     },
+    // fetch('https://nickdemid.store/tasks/8',{
+    //   method: "PATCH",
+    //   body: JSON.stringify({'task_title': 'экстра дип'})})
   },
   getters: {
     getTaskListInfo: (state) => state.taskList,
@@ -163,5 +161,6 @@ export const useTaskStore = defineStore('task', {
     getLoadingTasks: (state) => state.taskListLoading,
     getCount: (state) => state.countOfTasks,
     getToCreateTask: (state) => state.toCreateTask,
+    getTaskFire: (state) => (state.currentTask?.task_fire ? +state.currentTask?.task_fire : 0),
   },
 })

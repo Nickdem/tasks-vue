@@ -50,6 +50,9 @@ export interface applState {
 export interface RouteMetaMod extends RouteMeta {
   breadcrumbs?: BreadcrumbInfo[]
 }
+export interface ProgressBarProps {
+  percentage: number
+}
 
 const baseUrl = 'https://nickdemid.store/'
 

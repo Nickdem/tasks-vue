@@ -2,8 +2,14 @@
 import HeadingOneEl from '@/components/HeadingOneEl.vue'
 import { useUserStore } from '@/stores/user'
 import { randomInteger } from '@/utils'
+import { onMounted } from 'vue'
 
 const userStore = useUserStore()
+onMounted(() => {
+  if (!userStore.getUserListInfo.length) {
+    userStore.getFromApiUserList()
+  }
+})
 </script>
 
 <template>
