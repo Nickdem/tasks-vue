@@ -18,7 +18,7 @@
     <v-btn text="Выйти" slim @click="logoutHandler"></v-btn>
   </template>
 
-  <v-dialog transition="dialog-top-transition" width="auto" v-else>
+  <!-- <v-dialog transition="dialog-top-transition" width="auto" v-else>
     <template v-slot:activator="{ props: activatorProps }">
       <v-btn v-bind="activatorProps" text="Войти" slim></v-btn>
     </template>
@@ -31,8 +31,9 @@
         </v-card-actions>
       </v-card>
     </template>
-  </v-dialog>
+  </v-dialog> -->
   <!-- </template> -->
+  <PopupAuthBlock clsBtn="v-btn--slim" v-else />
 
   <v-btn class="ml-sm-2" text="Тема" border slim @click="applStore.toggleTheme"></v-btn>
 </template>
@@ -43,7 +44,8 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import { onMounted } from 'vue'
 import LogoEl from './LogoEl.vue'
-import PopupAuthEl from './PopupAuthEl.vue'
+import PopupAuthBlock from './PopupAuthBlock.vue'
+
 import LoaderEl from './LoaderEl.vue'
 import { getSessionUser, type UserInfo } from '@/utils'
 const router = useRouter()

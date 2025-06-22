@@ -6,6 +6,7 @@
       <a :href="link" target="_blank"
         ><v-btn class="elevation-4 rounded-xl mb-4">{{ linkText }}</v-btn></a
       >
+      <PopupAuthBlock clsBtn="elevation-4 rounded-xl mb-4" />
     </v-col>
     <v-col cols="12" md="6"> </v-col>
   </v-row>
@@ -13,6 +14,7 @@
 
 <script setup lang="ts">
 import HeadingOneEl from '@/components/HeadingOneEl.vue'
+import PopupAuthBlock from './PopupAuthBlock.vue'
 
 defineProps(['title', 'subtitle', 'link', 'linkText'])
 </script>
